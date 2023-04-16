@@ -1,0 +1,2 @@
+# email_verification
+使用gin实现的新用户注册登录和邮箱激活验证

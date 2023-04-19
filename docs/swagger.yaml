@@ -1,0 +1,196 @@
+basePath: /api
+definitions:
+  controllers.UserSignUpRequest:
+    properties:
+      email:
+        default: klaus@88.com
+        type: string
+      name:
+        default: klaus
+        type: string
+      password:
+        default: "123456"
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  models.LoginInputReq:
+    properties:
+      email:
+        default: klaus@88.com
+        type: string
+      password:
+        default: "123456"
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.Resp:
+    properties:
+      code:
+        description: 错误代码
+        type: integer
+      data:
+        description: 数据内容
+      msg:
+        description: 消息提示
+        type: string
+      request_id:
+        description: 请求ID
+        type: string
+    type: object
+  models.Token:
+    properties:
+      expires:
+        description: 过期时间
+        type: string
+      token:
+        description: token
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  description: Create and verify email addresses
+  title: Email Verification API
+  version: 1.0.0
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginInputReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Resp'
+      summary: 登录
+      tags:
+      - User
+  /me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户信息
+      tags:
+      - User
+  /ping:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Resp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Resp'
+      summary: 测试连通
+      tags:
+      - Health
+  /refresh_token:
+    post:
+      consumes:
+      - application/x-json-stream
+      operationId: refresh_token
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 刷新token
+      tags:
+      - User
+  /send_email:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 发送认证邮箱
+      tags:
+      - User
+  /signup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.UserSignUpRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Resp'
+      summary: 邮件注册
+      tags:
+      - User
+  /verify_email:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: info
+        in: query
+        name: info
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: redirect to main page
+          schema:
+            type: string
+      summary: 邮箱验证
+      tags:
+      - User
+securityDefinitions:
+  ApiKeyAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

@@ -1,0 +1,59 @@
+{{define "base"}}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        {{template "styles" .}}
+        <title>{{ .Subject}}</title>
+    </head>
+    <body class="">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="container">
+                <div class="header">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td class="align-center" width="100%">
+                                <a href="https://space.bilibili.com/64030869"><img
+                                            src="https://camo.githubusercontent.com/2daa5a3f385c1ede09c109bb121875bb7738b99dffb43683bdf272ac5dd3dd0a/68747470733a2f2f6d65646961312e67697068792e636f6d2f6d656469612f31334867774773584630616947592f67697068792e676966"
+                                            height="80" alt="Postdrop"></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="content">
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <span class="preheader">感谢使用我们的服务，仅差一步激活邮箱啦</span>
+                    <table role="presentation" class="main">
+
+                        <!-- START MAIN CONTENT AREA -->
+                        {{block "content" .}}{{end}}
+                        <!-- END MAIN CONTENT AREA -->
+                    </table>
+
+                    <!-- START FOOTER -->
+                    <div class="footer">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="content-block">
+                                    <span class="apple-link">BiliBili~</span>
+                                    <br> <a href="https://space.bilibili.com/64030869">点击关注UP主</a>.
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
+                </div>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    </body>
+
+    </html>
+{{end}}

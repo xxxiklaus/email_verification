@@ -1,11 +1,23 @@
-<p align='center'>
-  <img src='./img.png' alt='email verification' width='1000'/>
-</p>
+### 利用Gin框架实现的新用户进行邮箱注册登录验证与激活等流程
 
-<p align='center'>
- Email Verification Power By <b>Gin</b><sup><em>(speed)</em></sup><br>
-</p>
-<br>
+## 主页面
+![home](https://user-images.githubusercontent.com/124338898/233028794-f7a76fcd-ef29-450f-8c9b-e211bb28f9f2.png)
+
+## 获取信息
+![Apikey](https://user-images.githubusercontent.com/124338898/233029473-4887c065-6658-45c3-93a1-d8b011a14b07.png)
+
+## 发送失败（注册邮箱不存在的情况）
+<br>![failed](https://user-images.githubusercontent.com/124338898/233029774-70e92c0e-3398-4a10-a727-72845d8cc4c5.png)
+
+## 发送成功 PC端&手机端
+![email pc](https://user-images.githubusercontent.com/124338898/233030075-466a1693-c014-44c8-8d67-5321930876b9.png)
+
+![phone](https://user-images.githubusercontent.com/124338898/233030107-63447e96-b864-4f27-8c1e-44b86519142f.jpg)
+
+## 验证激活成功
+
+![vsucceed](https://user-images.githubusercontent.com/124338898/233030228-86b425c5-1fe6-434b-aaae-b67f7912ba13.png)
+
 
 ## Features
 
@@ -15,17 +27,11 @@
 -  邮件模板 HTML
 -  接口文档 Swagger
 
-## SNAPSHOTS
-
 ### Swagger
-
-<p align='center'>
-  <img src='./img_1.png' alt='email verification' width='600'/>
-</p>
 
 有些前端不喜欢在电脑上装客户端，swagger会是一个很好的选择
 
-``` golang
+``` go
 type PingResponse struct {
 	CommonResponse
 	Msg string `json:"Message" example:"boom"`
@@ -45,7 +51,7 @@ func Ping(c *gin.Context) {
 }
 ```
 
-### jwt
+### JWT
 
 其实jwt服务端做很麻烦，但是客户端调用简单。
 
@@ -57,7 +63,7 @@ func Ping(c *gin.Context) {
 - 最好设置较短的过期时间，防止被盗用后一直有效，降低损失。
 - Payload也可以存储一些业务信息，以便减少数据库的压力。
 
-``` golang
+``` go
 func InitAuthMiddlewares(controllers controllers.UserControllers) (*jwt.GinJWTMiddleware, error) {
     return jwt.New(&jwt.GinJWTMiddleware{
         IdentityKey:      "id",
@@ -94,7 +100,7 @@ router.GET("/user", authMiddleware.MiddlewareFunc(), controllersImpl.Info)
 - 微服务架构下，访问日志如何查询
 - 不同项目交互出现异常，如何做日志关联
 
-``` golang
+``` go
 r := gin.New()
 r.Use(requestid.New())
 
@@ -108,8 +114,8 @@ r.Run(":8080")
 
 
 ### 不足之处
-很多邮件客户端对HMTL的全局style支持一般，所以邮件的展示实现不够好
-只考虑手机端邮件的情况，记住邮件的layout一定要可响应式的
+- 很多邮件客户端对HMTL的全局style支持一般，所以邮件的展示实现不够好
+- 暂时只考虑到手机端邮件的情况，记住邮件的layout一定要可响应式的，平板端的UI部分不逞现..
 
 ## 参考的相关Guide
 

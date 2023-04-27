@@ -129,7 +129,7 @@ r.Run(":8080")
 
 ### JWT
 
-[Issue:jwt in swagger not include `Bearer`](https://github.com/swaggo/gin-swagger/issues/90)
+[Issue:jwt in swagger not include Bearer](https://github.com/swaggo/gin-swagger/issues/90)
 
 [如何在Gin框架中使用JWT实现认证机制](https://juejin.cn/post/7042520107976753165)
 
